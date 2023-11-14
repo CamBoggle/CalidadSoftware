@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Estilo.css' %}">
+    <title>Perros</title>
+    <link rel="icon" href="{% static 'img/icono-logo.ico' %}">
+    <script>
+        let url = 'https://api.thedogapi.com/v1/breeds';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => mostrarData(data))
+            .catch(error => console.log(error))
+        const mostrarData =(data)=>{
+            console.log(data)
+            let body=""
+            for(var i=0; i<10; i++)
+            {
+                body+=`<tr> 
+                    <td><p class="fuent">${data[i].weight.imperial+'\t'+data[i].weight.metric}</p></td>
+                    <td><p class="fuent">${data[i].height.imperial+'\t'+data[i].height.metric}</p></td>
+                    <td><p class="fuent">${data[i].id}</p></td>
+                    <td><p class="fuent">${data[i].name}</p></td>
+                    <td><p class="fuent">${data[i].bred_for}</p></td>
+                    <td><p class="fuent">${data[i].breed_group}</p></td>
+                    <td><p class="fuent">${data[i].life_span}</p></td>
+                    <td><p class="fuent">${data[i].temperament}</p></td>
+                    <td>${data[i].origin}</td>
+                    <td><img class="fotoApi" src=${data[i].image.url}></img></td>
+                    </tr>`
+            }
+            document.getElementById('data').innerHTML=body;
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid" style="background-color: #6d6d6d;"> <!--DIV GLOBAL-->
+
+
+        <!--LINEA SUPERIOR-->
+        <div class="container-fluid">
+            <div class="row" style="background-color: #6d6d6d;">
+                <div class="col-md">
+                    <div class="container-fluid" id="centrar">
+                        <div class="container-clock"> 
+                            <h1 id="time">00:00:00</h1>
+                            <p id="date">Fecha</p>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="col-md boton bajarBoton">
+                    <div class="iniciar">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" type="button" class="btn btn-info">Cerrar Sesion</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" type="button" class="btn btn-info">Iniciar Sesion</a>
+                        {% endif %}
+                    </div>   
+                </div>              
+            </div>
+        </div><!--FIN LINEA SUPERIOR-->
+
+
+
+        <!--NAVBAR DE COLOR-->
+        <nav class="navbar navbar-expand-sm bg-info navbar-dark"> 
+            <!--BOTON DE HAMBURGUESA-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#opciones">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--LOGO EN NAVBAR-->
+            <a href="{% url 'inicio' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" width="130px" height="130px">
+            </a>
+
+            <!--CONFIGURACION OPCIONES-->
+            <div class="collapse navbar-collapse" id="opciones">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gatos' %}">Gatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bienvenid@ {{user.username}}</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registrar' %}">Registrarse</a>
+                    </li>                 
+                </ul>
+                {% endif %}
+            </div>
+        </nav> <!--FIN NAVBAR-->
+        <br>
+        <!--INICIO CATALOGO PRODUCTOS DE PERRO-->
+        <div class="container-fluid">
+            <h4 id="letra">Alimentos Seleccionados</h4>
+        </div>
+        <br>
+        <!--CONDIFURACION DE CARTAS-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo1.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Royal Canin Medium Adulto 7+ 15kg</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$75.900</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Royal Canin Medium Adulto 7+ es un alimento completo para perros senior (de los 7 a los 10 años) de raza mediana  (11 a 25 kg). 
+                                Su fórmula tiene un contenido de nutrientes, con un exclusivo complejo de antioxidantes, que contribuyen a neutralizar los radicales libres y mantener la vitalidad de los perros que experimentan los primeros signos de envejecimiento. Formato de 15Kg.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo2.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Royal Canin Mini Adult Canino</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$26.500</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Royal Canin Mini Adult es una comida para perros adultos de tamaño pequeño (de 1 a 10 Kg) desde los 10 meses hasta los 8 años. La L-Carnitina estimula el metabolismo de las reservas grasas. Satisface las necesidades energéticas gracias al contenido adaptado en calorías (4060 Kcal/Kg) y proteínas (27%).
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo3.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Royal Canin MAXI Adulto 5+</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$70.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Royal Canin Maxi Adult 5 está indicado para perros adultos de razas grandes a partir de los 5 años, con un peso entre 26 y 44 kg. Este alimento le aporta al animal todos los nutrientes y vitaminas que necesita en esta etapa tan particular de su vida, para que tenga una dieta equilibrada y una correcta nutrición y así poder alcanzar el máximo de su esperanza de vida.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo4.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Dogxtreme Puppy Chicken & Rice</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$32.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                La receta del alimento Dogxtreme para perros cachorro cuenta con un 20% de pollo fresco, una proteína perfecta para ayudar a proporcionar un crecimiento equilibrado, que además cuenta con el sabor de uno de los ingredientes preferidos por nuestras mascotas. Ya que los cachorros necesitan un aporte extra de energía, la receta de Dogxtreme incluye un aporte de grasa un poco más elevado que la composición del pienso para adultos, para que pueda quemarlas al correr y jugar, además se añade L-Carnitina, que ayuda a este proceso, transformando la grasa en energía.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo5.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Dogxtreme Adult Salmon & Rice</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$38.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Dogxtreme Adult Salmon & Rice es todo lo que tu mascota necesita para mantener una alimentación saludable y completa. La composición con salmón proporciona un gran número de recursos que ayudarán a tu mascota a mantenerse con una vitalidad óptima y un óptimo nivel de salud en el pelo y la piel.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container-fluid">
+        <!--CARTAS JUGUETES-->
+            <h4 id="letra">Variedad en Juguetes</h4>
+        </div> 
+        <br> 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo6.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Loki eco</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$9.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                LOKI ECO es un juguete de alta calidad, estas fibras están hechas 100% de materiales reciclados, incluyendo botellas de agua post-consumo y residuos pre-consumo. Es un alto rendimiento, 100% sintético sostenible que ofrece total libertad de diseño. Para comenzar el proceso de elaboración se realiza la limpieza y desinfectación de las botellas de plástico, luego son fragmentadas y granuladas para convertir la fibra en relleno reciclado. Más que un nuevo juguete, los divertidos Loki Eco ayudan a proteger el medio ambiente.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo7.png' %}" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Pelota sonora 2pk Small 1 un.</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$10.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Chuckit! suficiente para excitar al "perro fanático de la búsqueda". Los colores brillantes señalan una aventura con un gran tiempo de juego por venir. Los juguetes de rendimiento están diseñados para llevar la acción al siguiente nivel. Estos productos dinámicos no están destinados a ser juguetes de juego en solitario. Basado en la innovación y el diseño ergonómico, Chuckit! ha revolucionado el clásico juego de fetch y la experiencia mejorada fomenta un juego más divertido. Nuestros juguetes son tan divertidos para las personas como lo son para las mascotas, atraen a los dueños al aire libre e inspiran un estilo de vida saludable y activo.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo8.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Kong chewstix asta Medium</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$16.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                KONG ChewStix Tough está diseñado para perros masticadores promedio y presenta un aroma a madera que atrae y recompensa el comportamiento adecuado de masticación.  Este juguete que satisface la masticación está fabricado para tener una gran resistencia y crear una satisfacción natural y duradera. Los bordes redondeados y las hendiduras prolongan el disfrute mientras aumentan la seguridad del juguete y ayudan a limpiar los dientes.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo9.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Cuerda simple con pelota unidad</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$2.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                La bola de cuerda de Guabu es un juguete para perros diseñado con una trenza de colores de materiales no tóxicos, como el algodón, es resistente y duradero. Son unos juguetes coloridos en variedad de formas que favorece una buena salud dental ayudando a quitar el sarro de sus dientes mientras lo muerde. Recuerda que a los perros les gusta jugar, es una manera de desarrollar su inteligencia y sus instintos.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card" style="background-color: #353535;">
+                        <img class="card-img-top" src="{% static 'img/Catalogo/catalogo10.png' %}">
+                        <div class="card-body">
+                            <h4 class="card-title fuenteBlanca">Kong Squeeezz Goomz Football</h4>
+                            <p class="card-text fuenteBlanca">
+                                <strong>$9.990</strong>   
+                            </p>
+                            <p class="card-text fuenteBlanca tamañoFueneProd" onmousemove="colorFondo(this)" onmouseout="colorBlanco(this)">
+                                Los llamativos nodos en relieve del balón de fútbol americano KONG Goomz dan masaje a los dientes y las encías y premian el buen comportamiento de masticado. Las texturas mixtas y el material duradero alientan una diversión constante y satisfacen los instintos naturales. El chirriador prolonga el tiempo de juego en sesiones de entretenimiento interactivo dentro y fuera de casa.
+                            </p>
+                            <a href="#" class="btn btn-info">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <h4 class="fuenteBlanca">Razas de perros</h4>
+            <table class="table-responsive table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Peso</th>
+                        <th>Altura</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Criado para</th>
+                        <th>Raza</th>
+                        <th>Años vida</th>
+                        <th>Temperamento</th>
+                        <th>Origen</th>
+                        <th>Imagen</th>                         
+                    </tr>
+                </thead>
+                <tbody id="data">
+
+                </tbody>
+            </table>
+        </div> 
+        <br>
+        <br> 
+
+        </div>   
+    </div> <!--FIN DIV GLOBAL-->   
+
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Dirección</h4>
+                        <p class="fuenteFooter">
+                        A108 Adam Street <br>
+                        New York, NY 535022 - US<br>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Contáctanos</h4>
+                        <p class="fuenteFooter">
+                        <strong>Teléfono:</strong> +569-98745632<br>
+                        <strong>Email:</strong> pawsshop10@gmail.com<br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Horarios de Atención</h4>
+                        <p class="fuenteFooter">
+                        <strong>Lunes-Sabado: </strong>11AM - 20PM<br>
+                        Domingo: 11AM - 16PM
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4 class="fuenteFooter">Síguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href="https://twitter.com" class="twitter" target="_blank">
+                            <i class="bi bi-twitter"></i>
+                            <img src="{% static 'img/Iconos/twitter.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.facebook.com" class="facebook" target="_blank">
+                            <i class="bi bi-facebook"></i>
+                            <img src="{% static 'img/Iconos/facebook.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.instagram.com/pawsshop10/" class="instagram" target="_blank">
+                            <i class="bi bi-instagram"></i>
+                            <img src="{% static 'img/Iconos/instagram.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.linkedin.com/company/royalcanin/" class="linkedin" target="_blank">
+                            <i class="bi bi-linkedin"></i>
+                            <img src="{% static 'img/Iconos/linkedid.png' %}" width="50px" height="50px">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright fuenteFooter">
+                &copy; Copyright <strong><span>Paws Shop</span></strong>. All Rights Reserved
+            </div> 
+            <div class="credits fuenteFooter">
+                Designed by Team Paws Shop
+            </div>
+        </div>
+
+    </footer><!-- FIN FOOTER -->
+    <!-- FIN FOOTER -->
+
+
+
+
+    <script src="{% static 'js/codes.js' %}"></script>
+    <script src="{% static 'js/clock.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>     
+</body>
+</html>
+
+
+
+

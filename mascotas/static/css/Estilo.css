@@ -1,0 +1,448 @@
+/*SELECTOR DE TIPO CLASS*/
+.boton{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  
+}
+
+.iniciar{
+    float:right;
+}
+
+.donacion{
+  padding-left: 20px;
+  float:right;
+}
+
+.parrafo{      
+    background-color: #6d6d6d;
+    color: rgb(255, 255, 255);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18pt;
+}
+
+.imagen{
+    display: block; 
+    width: 90%;      
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.marks{
+    width: 50%;      
+    margin-left: auto;  
+    margin-right: auto;
+}
+
+
+.fuenteFooter{
+    color: rgb(255, 255, 255);
+}
+
+.fuenteBlanca{
+    color: rgb(255, 255, 255);
+}
+
+.tamañoFueneProd{
+    font-size: 10pt;
+}
+
+
+.centrarBoton{
+    display: block;      
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+
+.tituloPaw{      
+    color: rgb(255, 255, 255);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20pt;
+}
+
+.fotoMap{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.fotoVid{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+.bajarBoton{
+  padding-top: 30px;
+}
+
+.fondoApi{
+  background-color:#17A2B8;
+}
+
+.fotoApi{
+  height: 200px;
+  width: 200px;
+}
+
+/*SELECTOR DE TIPO ID*/
+
+#letra{      
+    background-color: #6d6d6d;
+    color: rgb(255, 255, 255);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#letra2{     
+    margin-top: 8px;
+    background-color: #6d6d6d;
+    color: rgb(255, 255, 255);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+#tamanoLogo{
+    display: block;  
+    width: 50%;      
+    margin-left:auto;
+    margin-right:auto;
+}
+
+footer{
+    background-color: black;
+}
+
+/*RELOJ*/
+
+#centrar{
+  padding-top: 20px;
+  height: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-family: 'lato';
+}
+
+.container-clock{
+  text-align: center;
+
+}
+
+.container-clock h1{
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.container-clock p{
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+
+
+
+/*... VER MAS*/
+
+.contenedor{
+  width: 88%;
+  padding: 10px;
+  margin: auto;
+}
+
+.btnvermas{
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+.ocultar{
+  display: none;
+}
+
+.mostrar{
+  display: block;
+}
+
+/*ESTILOS API*/
+
+.fuent{
+  font-size: 15px;
+  text-align: center;
+}
+
+
+/*CONFIGURACION PARA VALIDAR*/
+.error-control{
+  border:1px solid red;
+}
+
+label.error{
+  color:red;
+  width: 250px;
+  font-size:0.8em;
+  margin-top:-5px;
+  margin-bottom:10px;
+}
+
+textarea{
+resize: none;
+}
+
+form {
+
+width: 50%;
+}
+
+
+.divuno{
+height: 70px;
+width: 100%;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+:root {
+    --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-primary: "Amatic SC", sans-serif;
+    --font-secondary: "Inter", sans-serif;
+  }
+  
+  /* Colors */
+  :root {
+    --color-default: #212529;
+    --color-primary: #ce1212;
+    --color-secondary: #37373f;
+  }
+  
+  /* Smooth scroll behavior */
+  :root {
+    scroll-behavior: smooth;
+  }
+  
+  /*--------------------------------------------------------------
+  # General
+  --------------------------------------------------------------*/
+  body {
+    font-family: var(--font-default);
+    color: var(--color-default);
+  }
+  
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #ec2727;
+    text-decoration: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-secondary);
+  }
+
+
+/*--------------------------------------------------------------
+# Sections & Section Header
+--------------------------------------------------------------*/
+section {
+    overflow: hidden;
+    padding: 80px 0;
+  }
+  
+  .section-bg {
+    background-color: #eee;
+  }
+  
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  .section-header h2 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    color: #7f7f90;
+    text-transform: uppercase;
+    font-family: var(--font-default);
+  }
+  
+  .section-header p {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 400;
+    font-family: var(--font-primary);
+  }
+  
+  .section-header p span {
+    color: var(--color-primary);
+  }
+
+
+
+
+
+
+  /*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about .about-img {
+    min-height: 500px;
+  }
+  
+  .about h3 {
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 30px;
+    font-family: var(--font-secondary);
+  }
+  
+  .about .call-us {
+    left: 10%;
+    right: 10%;
+    bottom: 10%;
+    background-color: #fff;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .about .call-us h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-family: var(--font-default);
+  }
+  
+  .about .call-us p {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  
+  .about .content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about .content ul li {
+    padding: 0 0 8px 26px;
+    position: relative;
+  }
+  
+  .about .content ul i {
+    position: absolute;
+    font-size: 20px;
+    left: 0;
+    top: -3px;
+    color: #212529;
+  }
+  
+  .about .content p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .about .play-btn {
+    width: 94px;
+    height: 94px;
+    background: radial-gradient(var(--color-primary) 50%, rgba(206, 18, 18, 0.4) 52%);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    left: calc(50% - 47px);
+    top: calc(50% - 47px);
+    overflow: hidden;
+  }
+  
+  .about .play-btn:before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    animation-delay: 0s;
+    animation: pulsate-btn 2s;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps;
+    opacity: 1;
+    border-radius: 50%;
+    border: 5px solid rgba(206, 18, 18, 0.7);
+    top: -15%;
+    left: -15%;
+    background: rgba(198, 16, 0, 0);
+  }
+  
+  .about .play-btn:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-40%) translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #fff;
+    z-index: 100;
+    transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  
+  .about .play-btn:hover:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-40%) translateY(-50%);
+    width: 0;
+    height: 0;
+    border: none;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #fff;
+    z-index: 200;
+    animation: none;
+    border-radius: 0;
+  }
+  
+  .about .play-btn:hover:after {
+    border-left: 15px solid var(--color-primary);
+    transform: scale(20);
+  }
+  
+  @keyframes pulsate-btn {
+    0% {
+      transform: scale(0.6, 0.6);
+      opacity: 1;
+    }
+  
+    100% {
+      transform: scale(1, 1);
+      opacity: 0;
+    }
+  }
+
+
+  iframe{
+    width: 100%;
+    height: 400px;
+  }

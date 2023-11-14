@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Estilo.css' %}">
+    <title>Inicio</title>
+    <link rel="icon" href="{% static 'img/icono-logo.ico' %}">
+</head>
+<body>
+    <div class="container-fluid" style="background-color: #6d6d6d;"> <!--DIV GLOBAL-->
+
+
+        <!--LINEA SUPERIOR-->
+        <div class="container-fluid">
+            <div class="row" style="background-color: #6d6d6d;">
+                <div class="col-md">
+                    <div class="container-fluid" id="centrar">
+                        <div class="container-clock"> 
+                            <h1 id="time">00:00:00</h1>
+                            <p id="date">Fecha</p>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="col-md boton bajarBoton">
+                    <div class="donacion">
+                        <a href="{% url 'donaciones' %}" type="button" class="btn btn-info">Realizar Donación</a>
+                    </div>
+                    <div class="iniciar">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" type="button" class="btn btn-info">Cerrar Sesion</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" type="button" class="btn btn-info">Iniciar Sesion</a>
+                        {% endif %}
+                    </div>   
+                </div>           
+            </div>
+        </div><!--FIN LINEA SUPERIOR-->
+
+
+
+        <!--NAVBAR DE COLOR-->
+        <nav class="navbar navbar-expand-sm bg-info navbar-dark"> 
+            <!--BOTON DE HAMBURGUESA-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#opciones">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--LOGO EN NAVBAR-->
+            <a href="{% url 'inicio' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" width="130px" height="130px">
+            </a>
+
+            <!--CONFIGURACION OPCIONES-->
+            <div class="collapse navbar-collapse" id="opciones">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gatos' %}">Gatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bienvenid@ {{user.username}}</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registrar' %}">Registrarse</a>
+                    </li>                 
+                </ul>
+                {% endif %}
+            </div>
+        </nav> <!--FIN NAVBAR-->
+
+        <div class="container-fluid">
+            <h4 id="letra">Ofertas Especiales!</h4>
+        </div>
+
+            <!--CARRUSEL-->
+        <div class="container-fluid" style="background-color: #6d6d6d;">
+            <div id="carousel1" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel1" data-slide-to="0" active></li>
+                    <li data-target="#carousel1" data-slide-to="1"></li> 
+                    <li data-target="#carousel1" data-slide-to="2"></li>
+                </ol>
+                <!--CONFIGURACION DE IMAGENES-->
+                <div class="carousel-inner"> 
+                    <!--CONFIG PRIMERA UBICACION-->
+                    <div class="carousel-item active"> 
+                        <img src="{% static 'img/img1.jpg' %}"  class="d-block w-100">
+                    </div>
+                    <!--CONFIG. UBICACIONES NORMALES-->
+                    <div class="carousel-item">
+                        <img src="{% static 'img/img2.jpg' %}" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/img3.jpg' %}" class="d-block w-100">
+                    </div>
+                </div><!--CIERRA EL INNER CAROUSEL-->
+
+                <!--AVANZAR Y RETROCEDER-->
+                <!--CONFIG. PARA RETROCEDER-->
+                <a href="#carousel1" class="carousel-control-prev" data-slide="prev"> 
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <!--CONFIG. PARA AVANZAR-->
+                <a href="#carousel1" class="carousel-control-next" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="container-fluid" style="background-color: #6d6d6d;">
+            <p class="parrafo">¡Super Ofertas Paws Shop!: Lleva más y paga menos</p>
+        </div>
+
+        <!--OFERTAS-->
+        <div class="container-fluid">
+            <div class="row" style="background-color: #6d6d6d;">
+                <div class="col-md">
+                    <img src="{% static 'img/ofer1.jpg' %}" class="imagen">
+                </div> 
+                <div class="col-md">
+                    <img src="{% static 'img/ofer2.jpg' %}" class="imagen">
+                </div>    
+                <div class="col-md">
+                    <img src="{% static 'img/ofer3.jpg' %}" class="imagen">
+                </div>                
+            </div>
+        </div>
+        <!--FIN OFERTAS-->
+        <br>
+
+        <!--ACA VA NUESTRAS MARCAS-->
+        <div class="container-fluid">
+            <h4 id="letra">Marcas Populares</h4>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div class="row" style="background-color: #6d6d6d;">
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca1.png' %}" class="marks">
+                </div> 
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca2.png' %}" class="marks">
+                </div>    
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca3.png' %}" class="marks">
+                </div>   
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca4.png' %}" class="marks">
+                </div>
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca5.png' %}" class="marks">
+                </div>
+                <div class="col-md">
+                    <img src="{% static 'img/Marcas/marca6.png' %}" class="marks">s
+                </div>                
+            </div>
+            <br>
+            <br>
+        </div>
+        <!--FIN NUESTRAS MARCAS-->
+     
+    </div> <!--FIN DIV GLOBAL-->   
+
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Dirección</h4>
+                        <p class="fuenteFooter">
+                        A108 Adam Street <br>
+                        New York, NY 535022 - US<br>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Contáctanos</h4>
+                        <p class="fuenteFooter">
+                        <strong>Teléfono:</strong> +569-98745632<br>
+                        <strong>Email:</strong> pawsshop10@gmail.com<br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Horarios de Atención</h4>
+                        <p class="fuenteFooter">
+                        <strong>Lunes-Sabado: </strong>11AM - 20PM<br>
+                        <Strong>Domingo:</Strong> 11AM - 16PM
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4 class="fuenteFooter">Síguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href="https://twitter.com" class="twitter" target="_blank">
+                            <i class="bi bi-twitter"></i>
+                            <img src="{% static 'img/Iconos/twitter.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.facebook.com" class="facebook" target="_blank">
+                            <i class="bi bi-facebook"></i>
+                            <img src="{% static 'img/Iconos/facebook.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.instagram.com/pawsshop10/" class="instagram" target="_blank">
+                            <i class="bi bi-instagram"></i>
+                            <img src="{% static 'img/Iconos/instagram.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.linkedin.com/company/royalcanin/" class="linkedin" target="_blank">
+                            <i class="bi bi-linkedin"></i>
+                            <img src="{% static 'img/Iconos/linkedid.png' %}" width="50px" height="50px">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright fuenteFooter">
+                &copy; Copyright <strong><span>Paws Shop</span></strong>. All Rights Reserved
+            </div> 
+            <div class="credits fuenteFooter">
+                Designed by Team Paws Shop
+            </div>
+        </div>
+
+    </footer><!-- FIN FOOTER -->
+    <!-- FIN FOOTER -->
+
+
+
+
+    <script src="{% static 'js/codes.js' %}"></script>
+    <script src="{% static 'js/clock.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>     
+</body>
+</html>

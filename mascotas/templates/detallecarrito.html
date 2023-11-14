@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Estilo.css' %}">
+    <title>Tienda</title>
+    <link rel="icon" href="{% static 'img/icono-logo.ico' %}">
+</head>
+<body>
+    <div class="container-fluid" style="background-color: #6d6d6d;"> <!--DIV GLOBAL-->
+
+
+        <!--LINEA SUPERIOR-->
+        <div class="container-fluid">
+            <div class="row" style="background-color: #6d6d6d;">
+                <div class="col-md">
+                    <div class="container-fluid" id="centrar">
+                        <div class="container-clock"> 
+                            <h1 id="time">00:00:00</h1>
+                            <p id="date">Fecha</p>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="col-md boton bajarBoton">
+                    <div class="iniciar">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" type="button" class="btn btn-info">Cerrar Sesion</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" type="button" class="btn btn-info">Iniciar Sesion</a>
+                        {% endif %}
+                    </div>   
+                </div>           
+            </div>
+        </div><!--FIN LINEA SUPERIOR-->
+
+
+
+        <!--NAVBAR DE COLOR-->
+        <nav class="navbar navbar-expand-sm bg-info navbar-dark"> 
+            <!--BOTON DE HAMBURGUESA-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#opciones">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--LOGO EN NAVBAR-->
+            <a href="{% url 'inicio' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" width="130px" height="130px">
+            </a>
+
+            <!--CONFIGURACION OPCIONES-->
+            <div class="collapse navbar-collapse" id="opciones">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gatos' %}">Gatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bienvenid@ {{user.username}}</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perros' %}">Perros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quienes' %}">¿Quienes Somos?</a>
+                    </li>                 
+                </ul>
+                {% endif %}
+            </div>
+        </nav> <!--FIN NAVBAR-->
+        <br><br>
+        <div class="container fuenteBlanca" style="background-color: #353535;">
+            <h3> Detalle de Compra </h3><br><h6>Fecha: {{ fecha }}</h6>
+            <hr>
+            <table class="table fuenteBlanca" style="background-color: #353535;">
+                <thead>
+                    <tr>
+                        <th>Código Boleta</th>
+                        <th>Código Producto</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prod in productos%}
+                    <tr>
+                        <td>{{ prod.id_boleta }}</td>
+                        <td>{{ prod.id_producto }}</td>
+                        <td>{{ prod.cantidad }}</td>
+                        <td>{{ prod.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                   
+                <tr><td><h6>Total Compra: ${{ total }}</h6></td>
+                </tr>
+            </table>
+        </div>
+
+    </div> <!--FIN DIV GLOBAL-->
+
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Dirección</h4>
+                        <p class="fuenteFooter">
+                        A108 Adam Street <br>
+                        New York, NY 535022 - US<br>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Contáctanos</h4>
+                        <p class="fuenteFooter">
+                        <strong>Teléfono:</strong> +569-98745632<br>
+                        <strong>Email:</strong> pawsshop10@gmail.com<br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4 class="fuenteFooter">Horarios de Atención</h4>
+                        <p class="fuenteFooter">
+                        <strong>Lunes-Sabado: </strong>11AM - 20PM<br>
+                        <Strong>Domingo:</Strong> 11AM - 16PM
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4 class="fuenteFooter">Síguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href="https://twitter.com" class="twitter" target="_blank">
+                            <i class="bi bi-twitter"></i>
+                            <img src="{% static 'img/Iconos/twitter.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.facebook.com" class="facebook" target="_blank">
+                            <i class="bi bi-facebook"></i>
+                            <img src="{% static 'img/Iconos/facebook.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.instagram.com/pawsshop10/" class="instagram" target="_blank">
+                            <i class="bi bi-instagram"></i>
+                            <img src="{% static 'img/Iconos/instagram.png' %}" width="50px" height="50px">
+                        </a>
+                        <a href="https://www.linkedin.com/company/royalcanin/" class="linkedin" target="_blank">
+                            <i class="bi bi-linkedin"></i>
+                            <img src="{% static 'img/Iconos/linkedid.png' %}" width="50px" height="50px">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright fuenteFooter">
+                &copy; Copyright <strong><span>Paws Shop</span></strong>. All Rights Reserved
+            </div> 
+            <div class="credits fuenteFooter">
+                Designed by Team Paws Shop
+            </div>
+        </div>
+
+    </footer><!-- FIN FOOTER -->
+    <!-- FIN FOOTER -->
+
+    <script src="{% static 'js/codes.js' %}"></script>
+    <script src="{% static 'js/clock.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+</body>
+</html>
